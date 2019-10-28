@@ -1,0 +1,658 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Accuracy and Misclassification}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{day-and-night-image-classifier}{%
+\subsection{\# Day and Night Image
+Classifier}\label{day-and-night-image-classifier}}
+
+The day/night image dataset consists of 200 RGB color images in two
+categories: day and night. There are equal numbers of each example: 100
+day images and 100 night images.
+
+We'd like to build a classifier that can accurately label these images
+as day or night, and that relies on finding distinguishing features
+between the two types of images!
+
+\emph{Note: All images come from the
+\href{http://cs.uky.edu/~jacobs/datasets/amos/}{AMOS dataset} (Archive
+of Many Outdoor Scenes).}
+
+    \hypertarget{import-resources}{%
+\subsubsection{Import resources}\label{import-resources}}
+
+Before you get started on the project code, import the libraries and
+resources that you'll need.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{cv2} \PY{c+c1}{\PYZsh{} computer vision library}
+        \PY{k+kn}{import} \PY{n+nn}{helpers}
+        
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{image} \PY{k}{as} \PY{n+nn}{mpimg}
+        
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    \hypertarget{training-and-testing-data}{%
+\subsection{Training and Testing Data}\label{training-and-testing-data}}
+
+The 200 day/night images are separated into training and testing
+datasets.
+
+\begin{itemize}
+\tightlist
+\item
+  60\% of these images are training images, for you to use as you create
+  a classifier.
+\item
+  40\% are test images, which will be used to test the accuracy of your
+  classifier.
+\end{itemize}
+
+First, we set some variables to keep track of some where our images are
+stored:
+
+\begin{verbatim}
+image_dir_training: the directory where our training image data is stored
+image_dir_test: the directory where our test image data is stored
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} Image data directories}
+        \PY{n}{image\PYZus{}dir\PYZus{}training} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{day\PYZus{}night\PYZus{}images/training/}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{image\PYZus{}dir\PYZus{}test} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{day\PYZus{}night\PYZus{}images/test/}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+    \hypertarget{load-the-datasets}{%
+\subsection{Load the datasets}\label{load-the-datasets}}
+
+These first few lines of code will load the training day/night images
+and store all of them in a variable, \texttt{IMAGE\_LIST}. This list
+contains the images and their associated label (``day'' or ``night'').
+
+For example, the first image-label pair in \texttt{IMAGE\_LIST} can be
+accessed by index: \texttt{IMAGE\_LIST{[}0{]}{[}:{]}}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} Using the load\PYZus{}dataset function in helpers.py}
+        \PY{c+c1}{\PYZsh{} Load training data}
+        \PY{n}{IMAGE\PYZus{}LIST} \PY{o}{=} \PY{n}{helpers}\PY{o}{.}\PY{n}{load\PYZus{}dataset}\PY{p}{(}\PY{n}{image\PYZus{}dir\PYZus{}training}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{construct-a-standardized_list-of-input-images-and-output-labels.}{%
+\subsection{\texorpdfstring{Construct a \texttt{STANDARDIZED\_LIST} of
+input images and output
+labels.}{Construct a STANDARDIZED\_LIST of input images and output labels.}}\label{construct-a-standardized_list-of-input-images-and-output-labels.}}
+
+This function takes in a list of image-label pairs and outputs a
+\textbf{standardized} list of resized images and numerical labels.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} Standardize all training images}
+        \PY{n}{STANDARDIZED\PYZus{}LIST} \PY{o}{=} \PY{n}{helpers}\PY{o}{.}\PY{n}{standardize}\PY{p}{(}\PY{n}{IMAGE\PYZus{}LIST}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{visualize-the-standardized-data}{%
+\subsection{Visualize the standardized
+data}\label{visualize-the-standardized-data}}
+
+Display a standardized image from STANDARDIZED\_LIST.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} Display a standardized image and its label}
+        
+        \PY{c+c1}{\PYZsh{} Select an image by index}
+        \PY{n}{image\PYZus{}num} \PY{o}{=} \PY{l+m+mi}{0}
+        \PY{n}{selected\PYZus{}image} \PY{o}{=} \PY{n}{STANDARDIZED\PYZus{}LIST}\PY{p}{[}\PY{n}{image\PYZus{}num}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        \PY{n}{selected\PYZus{}label} \PY{o}{=} \PY{n}{STANDARDIZED\PYZus{}LIST}\PY{p}{[}\PY{n}{image\PYZus{}num}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Display image and data about it}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{selected\PYZus{}image}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Shape: }\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{selected\PYZus{}image}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Label [1 = day, 0 = night]: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{selected\PYZus{}label}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Shape: (600, 1100, 3)
+Label [1 = day, 0 = night]: 1
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{feature-extraction}{%
+\section{Feature Extraction}\label{feature-extraction}}
+
+Create a feature that represents the brightness in an image. We'll be
+extracting the \textbf{average brightness} using HSV colorspace.
+Specifically, we'll use the V channel (a measure of brightness), add up
+the pixel values in the V channel, then divide that sum by the area of
+the image to get the average Value of the image.
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\hypertarget{find-the-average-brigtness-using-the-v-channel}{%
+\subsubsection{Find the average brigtness using the V
+channel}\label{find-the-average-brigtness-using-the-v-channel}}
+
+This function takes in a \textbf{standardized} RGB image and returns a
+feature (a single value) that represent the average level of brightness
+in the image. We'll use this value to classify the image as day or
+night.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} Find the average Value or brightness of an image}
+        \PY{k}{def} \PY{n+nf}{avg\PYZus{}brightness}\PY{p}{(}\PY{n}{rgb\PYZus{}image}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} Convert image to HSV}
+            \PY{n}{hsv} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{cvtColor}\PY{p}{(}\PY{n}{rgb\PYZus{}image}\PY{p}{,} \PY{n}{cv2}\PY{o}{.}\PY{n}{COLOR\PYZus{}RGB2HSV}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Add up all the pixel values in the V channel}
+            \PY{n}{sum\PYZus{}brightness} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{hsv}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+            \PY{n}{area} \PY{o}{=} \PY{l+m+mi}{600}\PY{o}{*}\PY{l+m+mf}{1100.0}  \PY{c+c1}{\PYZsh{} pixels}
+            
+            \PY{c+c1}{\PYZsh{} find the avg}
+            \PY{n}{avg} \PY{o}{=} \PY{n}{sum\PYZus{}brightness}\PY{o}{/}\PY{n}{area}
+            
+            \PY{k}{return} \PY{n}{avg}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} Testing average brightness levels}
+        \PY{c+c1}{\PYZsh{} Look at a number of different day and night images and think about }
+        \PY{c+c1}{\PYZsh{} what average brightness value separates the two types of images}
+        
+        \PY{c+c1}{\PYZsh{} As an example, a \PYZdq{}night\PYZdq{} image is loaded in and its avg brightness is displayed}
+        \PY{n}{image\PYZus{}num} \PY{o}{=} \PY{l+m+mi}{190}
+        \PY{n}{test\PYZus{}im} \PY{o}{=} \PY{n}{STANDARDIZED\PYZus{}LIST}\PY{p}{[}\PY{n}{image\PYZus{}num}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        
+        \PY{n}{avg} \PY{o}{=} \PY{n}{avg\PYZus{}brightness}\PY{p}{(}\PY{n}{test\PYZus{}im}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Avg brightness: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{avg}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{test\PYZus{}im}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Avg brightness: 35.2170090909
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} <matplotlib.image.AxesImage at 0x14525e518>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{classification-and-visualizing-error}{%
+\section{Classification and Visualizing
+Error}\label{classification-and-visualizing-error}}
+
+In this section, we'll turn our average brightness feature into a
+classifier that takes in a standardized image and returns a
+\texttt{predicted\_label} for that image. This \texttt{estimate\_label}
+function should return a value: 0 or 1 (night or day, respectively).
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\hypertarget{todo-build-a-complete-classifier}{%
+\subsubsection{TODO: Build a complete
+classifier}\label{todo-build-a-complete-classifier}}
+
+Complete this code so that it returns an estimated class label given an
+input RGB image.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} This function should take in RGB image input}
+        \PY{k}{def} \PY{n+nf}{estimate\PYZus{}label}\PY{p}{(}\PY{n}{rgb\PYZus{}image}\PY{p}{)}\PY{p}{:}
+            
+            \PY{c+c1}{\PYZsh{} Extract average brightness feature from an RGB image }
+            \PY{n}{avg} \PY{o}{=} \PY{n}{avg\PYZus{}brightness}\PY{p}{(}\PY{n}{rgb\PYZus{}image}\PY{p}{)}
+                
+            \PY{c+c1}{\PYZsh{} Use the avg brightness feature to predict a label (0, 1)}
+            \PY{n}{predicted\PYZus{}label} \PY{o}{=} \PY{l+m+mi}{0}
+            \PY{n}{threshold} \PY{o}{=} \PY{l+m+mi}{120}
+            \PY{k}{if}\PY{p}{(}\PY{n}{avg} \PY{o}{\PYZgt{}} \PY{n}{threshold}\PY{p}{)}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{} if the average brightness is above the threshold value, we classify it as \PYZdq{}day\PYZdq{}}
+                \PY{n}{predicted\PYZus{}label} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{c+c1}{\PYZsh{} else, the pred\PYZhy{}cted\PYZus{}label can stay 0 (it is predicted to be \PYZdq{}night\PYZdq{})}
+            
+            \PY{k}{return} \PY{n}{predicted\PYZus{}label}    
+            
+\end{Verbatim}
+
+
+    \hypertarget{testing-the-classifier}{%
+\subsection{Testing the classifier}\label{testing-the-classifier}}
+
+Here is where we test your classification algorithm using our test set
+of data that we set aside at the beginning of the notebook!
+
+Since we are using a pretty simple brightess feature, we may not expect
+this classifier to be 100\% accurate. We'll aim for around 75-85\%
+accuracy usin this one feature.
+
+\hypertarget{test-dataset}{%
+\subsubsection{Test dataset}\label{test-dataset}}
+
+Below, we load in the test dataset, standardize it using the
+\texttt{standardize} function you defined above, and then
+\textbf{shuffle} it; this ensures that order will not play a role in
+testing accuracy.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{k+kn}{import} \PY{n+nn}{random}
+         
+         \PY{c+c1}{\PYZsh{} Using the load\PYZus{}dataset function in helpers.py}
+         \PY{c+c1}{\PYZsh{} Load test data}
+         \PY{n}{TEST\PYZus{}IMAGE\PYZus{}LIST} \PY{o}{=} \PY{n}{helpers}\PY{o}{.}\PY{n}{load\PYZus{}dataset}\PY{p}{(}\PY{n}{image\PYZus{}dir\PYZus{}test}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Standardize the test data}
+         \PY{n}{STANDARDIZED\PYZus{}TEST\PYZus{}LIST} \PY{o}{=} \PY{n}{helpers}\PY{o}{.}\PY{n}{standardize}\PY{p}{(}\PY{n}{TEST\PYZus{}IMAGE\PYZus{}LIST}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Shuffle the standardized test data}
+         \PY{n}{random}\PY{o}{.}\PY{n}{shuffle}\PY{p}{(}\PY{n}{STANDARDIZED\PYZus{}TEST\PYZus{}LIST}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{determine-the-accuracy}{%
+\subsection{Determine the Accuracy}\label{determine-the-accuracy}}
+
+Compare the output of your classification algorithm (a.k.a. your
+``model'') with the true labels and determine the accuracy.
+
+This code stores all the misclassified images, their predicted labels,
+and their true labels, in a list called \texttt{misclassified}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} Constructs a list of misclassified images given a list of test images and their labels}
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}misclassified\PYZus{}images}\PY{p}{(}\PY{n}{test\PYZus{}images}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} Track misclassified images by placing them into a list}
+             \PY{n}{misclassified\PYZus{}images\PYZus{}labels} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+             \PY{c+c1}{\PYZsh{} Iterate through all the test images}
+             \PY{c+c1}{\PYZsh{} Classify each image and compare to the true label}
+             \PY{k}{for} \PY{n}{image} \PY{o+ow}{in} \PY{n}{test\PYZus{}images}\PY{p}{:}
+         
+                 \PY{c+c1}{\PYZsh{} Get true data}
+                 \PY{n}{im} \PY{o}{=} \PY{n}{image}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                 \PY{n}{true\PYZus{}label} \PY{o}{=} \PY{n}{image}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+         
+                 \PY{c+c1}{\PYZsh{} Get predicted label from your classifier}
+                 \PY{n}{predicted\PYZus{}label} \PY{o}{=} \PY{n}{estimate\PYZus{}label}\PY{p}{(}\PY{n}{im}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} Compare true and predicted labels }
+                 \PY{k}{if}\PY{p}{(}\PY{n}{predicted\PYZus{}label} \PY{o}{!=} \PY{n}{true\PYZus{}label}\PY{p}{)}\PY{p}{:}
+                     \PY{c+c1}{\PYZsh{} If these labels are not equal, the image has been misclassified}
+                     \PY{n}{misclassified\PYZus{}images\PYZus{}labels}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{im}\PY{p}{,} \PY{n}{predicted\PYZus{}label}\PY{p}{,} \PY{n}{true\PYZus{}label}\PY{p}{)}\PY{p}{)}
+                     
+             \PY{c+c1}{\PYZsh{} Return the list of misclassified [image, predicted\PYZus{}label, true\PYZus{}label] values}
+             \PY{k}{return} \PY{n}{misclassified\PYZus{}images\PYZus{}labels}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} Find all misclassified images in a given test set}
+         \PY{n}{MISCLASSIFIED} \PY{o}{=} \PY{n}{get\PYZus{}misclassified\PYZus{}images}\PY{p}{(}\PY{n}{STANDARDIZED\PYZus{}TEST\PYZus{}LIST}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Accuracy calculations}
+         \PY{n}{total} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{STANDARDIZED\PYZus{}TEST\PYZus{}LIST}\PY{p}{)}
+         \PY{n}{num\PYZus{}correct} \PY{o}{=} \PY{n}{total} \PY{o}{\PYZhy{}} \PY{n+nb}{len}\PY{p}{(}\PY{n}{MISCLASSIFIED}\PY{p}{)}
+         \PY{n}{accuracy} \PY{o}{=} \PY{n}{num\PYZus{}correct}\PY{o}{/}\PY{n}{total}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accuracy: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{accuracy}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of misclassified images = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{MISCLASSIFIED}\PY{p}{)}\PY{p}{)} \PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ out of }\PY{l+s+s1}{\PYZsq{}}\PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{total}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accuracy: 0.86875
+Number of misclassified images = 21 out of 160
+
+    \end{Verbatim}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+ \#\#\# Visualize the misclassified images
+
+Visualize some of the images you classified wrong (in the
+\texttt{MISCLASSIFIED} list) and note any qualities that make them
+difficult to classify. This will help you identify any weaknesses in
+your classification algorithm.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} Visualize misclassified example(s)}
+         \PY{c+c1}{\PYZsh{}\PYZsh{} TODO: Display an image in the `MISCLASSIFIED` list }
+         \PY{c+c1}{\PYZsh{}\PYZsh{} TODO: Print out its predicted label \PYZhy{} to see what the image *was* incorrectly classified as5}
+         \PY{n}{num} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{test\PYZus{}mis\PYZus{}im} \PY{o}{=} \PY{n}{MISCLASSIFIED}\PY{p}{[}\PY{n}{num}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{test\PYZus{}mis\PYZus{}im}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{MISCLASSIFIED}\PY{p}{[}\PY{n}{num}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_24_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+ \#\# (Question): After visualizing these misclassifications, what
+weaknesses do you think your classification algorithm has?
+
+    \textbf{Answer:} Write your answer, here.
+
+    \hypertarget{improve-your-algorithm}{%
+\section{5. Improve your algorithm!}\label{improve-your-algorithm}}
+
+\begin{itemize}
+\item
+  (Optional) Tweak your threshold so that accuracy is better.
+\item ~
+  \hypertarget{optional-add-another-feature-that-tackles-a-weakness-you-identified}{%
+  \subsection{(Optional) Add another feature that tackles a weakness you
+  identified!}\label{optional-add-another-feature-that-tackles-a-weakness-you-identified}}
+\end{itemize}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
