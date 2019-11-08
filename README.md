@@ -4,3 +4,4 @@ Contents
     1) Image Representation and Classification
     2) Convolutional Filters and Edge Detection
     3) Image Features and Segmentation
+    4) Feature Vector
