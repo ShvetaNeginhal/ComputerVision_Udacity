@@ -6,3 +6,4 @@ Contents
     3) Image Features and Segmentation
     4) Feature Vector
     5) CNN Layers and Feature Visualization
+    6) PROJECT 1 - Facial Keypoint Detection
