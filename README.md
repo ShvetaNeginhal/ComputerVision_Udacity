@@ -9,4 +9,4 @@ Contents
     6) PROJECT 1 - Facial Keypoint Detection
 
 2) Advanced CNN
-    1)YOLO
+1)YOLO
