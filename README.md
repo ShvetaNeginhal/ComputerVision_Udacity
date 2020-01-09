@@ -1,5 +1,6 @@
 # ComputerVision_Udacity
 Contents
+
 1) Introduction to CV
     1) Image Representation and Classification
     2) Convolutional Filters and Edge Detection
@@ -9,4 +10,5 @@ Contents
     6) PROJECT 1 - Facial Keypoint Detection
 
 2) Advanced CNN
-1)YOLO
+    1)YOLO
+    2)Recurrent Neural Network (RNN)
