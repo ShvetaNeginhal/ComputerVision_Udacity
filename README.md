@@ -6,13 +6,13 @@ Contents
     2) Convolutional Filters and Edge Detection
     3) Image Features and Segmentation
     4) Feature Vector
-    5) CNN Layers and Feature Visualization
-    **PROJECT 1 - Facial Keypoint Detection**
+    5) CNN Layers and Feature Visualization</br>
+    **PROJECT 1 - Facial Keypoint Detection** 
 
 2) Advanced CNN
     1) YOLO
-    2) LSTM  and RNN
+    2) LSTM  and RNN</br>
     **Project 2 - Image Captioning**
 
-3) Object Tracking and Localization
+3) Object Tracking and Localization</br>
     **Project 3 - SLAM**
