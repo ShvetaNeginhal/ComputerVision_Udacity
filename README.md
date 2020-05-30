@@ -7,7 +7,12 @@ Contents
     3) Image Features and Segmentation
     4) Feature Vector
     5) CNN Layers and Feature Visualization
-    6) PROJECT 1 - Facial Keypoint Detection
+    **PROJECT 1 - Facial Keypoint Detection**
+
 2) Advanced CNN
     1) YOLO
-    2) Recurrent Neural Network (RNN)
+    2) LSTM  and RNN
+    **Project 2 - Image Captioning**
+
+3) Object Tracking and Localization
+    **Project 3 - SLAM**
